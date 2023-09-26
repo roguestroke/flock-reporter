@@ -7,13 +7,17 @@
 
         npm install
 
-3. Modify your playwright.config.ts file to include the following:
+3. Create flock *Outgoing Webhook* using [documentation](https://dev.flock.com/webhook)
+
+
+4. Modify your playwright.config.ts file to include the following:
 
         reporter: [
             [
                 './flockReporter.ts',
                 {
-                    flockWebHookUrl: 'https://api.flock.com/hooks/sendMessage/XXXXX-0000-TTTT-AAAAA-N000000000000' // provide flock webhook url
+                    flockWebHookUrl: 
+                    'https://api.flock.com/hooks/sendMessage/XXXXX-0000-TTTT-AAAAA-N000000000000' // provide flock webhook url
                 }
             ],
             ['html'], //other reporters
