@@ -39,7 +39,7 @@ class FlockReporter implements Reporter {
       resultText = `${runResult} *😭*`;
     }
     await this.sendMessage(
-      `===================== Run ${resultText} =====================\nTests execution time: *${testsDuration} sec*\nRun duration: *${totalDuration}* sec\n*✅ ${
+      `===================== Run ${resultText} =====================\nTests execution time: *${testsDuration}* sec\nRun duration: *${totalDuration}* sec\n*✅ ${
         totalPassed.length
       }* | *❌ ${totalFailed.length}* | *🟡 ${totalTimedOut.length}* | *⏩ ${totalSkipped.length}*\nJob Name: ${
         process.env.CI_JOB_NAME ?? 'local run'
