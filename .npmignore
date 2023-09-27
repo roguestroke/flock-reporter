@@ -1,4 +1,4 @@
 node_modules/
-prettierrc.json
+.prettierrc.json
 package-lock.json
 .gitignore
