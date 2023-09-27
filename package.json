@@ -2,13 +2,10 @@
     "name": "playwright-flock-reporter",
     "version": "1.0.0",
     "description": "A Playwright Reporter for the Flock messenger",
-    "main": "dist/reporter.js",
-    "files": [
-      "dist"
-    ],
+    "main": "reporter.js",
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/roguestroke/playwright-flock-reporter.git"
+      "url": "git+https://github.com/roguestroke/flock-reporter.git"
     },
     "keywords": [
       "playwright",
@@ -16,7 +13,8 @@
       "reporter"
     ],
     "author": "Sergey Terentev",
-    "homepage": "https://github.com/roguestroke/playwright-flock-reporter#readme",
+    "license": "MIT",
+    "homepage": "https://github.com/roguestroke/flock-reporter#readme",
     "peerDependencies": {
       "@playwright/test": "^1.38.1",
       "playwright-core": "^1.38.1"
