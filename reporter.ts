@@ -3,8 +3,8 @@ import type { Reporter, FullConfig, Suite, TestCase, TestResult, FullResult } fr
 
 class FlockReporter implements Reporter {
   allResults: Array<{ test: TestCase; result: TestResult }>;
-  startTime: number;
   webhook: string | undefined;
+  startTime: number
 
   async onBegin(config: FullConfig, suite: Suite) {
     this.webhook = config.reporter[0][1].flockWebHookUrl;
@@ -16,7 +16,7 @@ class FlockReporter implements Reporter {
       console.log(message);
       return;
     }
-    await this.sendMessage(`**🎭** Starting the run with **${totalTests}** tests`);
+    await this.sendMessage(`🎭 Starting the run with *${totalTests}* tests`);
   }
 
   onTestEnd(test: TestCase, result: TestResult) {
@@ -29,8 +29,8 @@ class FlockReporter implements Reporter {
     const totalFailed = this.allResults.filter((res) => res.result.status === 'failed');
     const totalTimedOut = this.allResults.filter((res) => res.result.status === 'timedOut');
     const totalSkipped = this.allResults.filter((res) => res.result.status === 'skipped');
-    const totalDuration = ((this.getExactTime() - this.startTime) / 1000).toFixed(2);
-    const testsDuration: string = (this.allResults[0].result.duration / 1000).toFixed(2);
+    const totalDuration = ((this.getExactTime() - this.startTime)/1000).toFixed(2); 
+    const testsDuration: string = (this.allResults[0].result.duration / 1000).toFixed(2); 
 
     let resultText;
     if (runResult === 'passed') {
@@ -38,9 +38,17 @@ class FlockReporter implements Reporter {
     } else {
       resultText = `${runResult} *😭*`;
     }
-    await this.sendMessage(`
-      ===================== Run ${resultText} =====================\nTests execution time: *${testsDuration}*\nRun duration: *${totalDuration}*\n*✅ ${totalPassed.length}* | *❌ ${totalFailed.length}* | *🟡 ${totalTimedOut.length}* | *⏩ ${totalSkipped.length}*\n=====================================================
-      `);
+    await this.sendMessage(
+      `===================== Run ${resultText} =====================\nTests execution time: *${testsDuration} sec*\nRun duration: *${totalDuration}* sec\n*✅ ${
+        totalPassed.length
+      }* | *❌ ${totalFailed.length}* | *🟡 ${totalTimedOut.length}* | *⏩ ${totalSkipped.length}*\nJob Name: ${
+        process.env.CI_JOB_NAME ?? 'local run'
+      }\nSee More: ${process.env.CI_JOB_URL ?? 'local run'}\nReport: ${`${
+        process.env.CI_JOB_URL ?? 'local run'
+      }/artifacts/browse`}\nCommit Author: ${
+        process.env.CI_COMMIT_AUTHOR ?? 'local runer'
+      }\n=====================================================`
+    );
   }
 
   async sendMessage(message: string) {
@@ -71,7 +79,9 @@ class FlockReporter implements Reporter {
 
   getExactTime(): number {
     const [seconds, nanoseconds] = process.hrtime();
-    return seconds * 1000 + ((nanoseconds / 1000) | 0) / 1000;
+    const k = seconds * 1000 + ((nanoseconds / 1000) | 0) / 1000;
+    return k
   }
+
 }
 export default FlockReporter;
