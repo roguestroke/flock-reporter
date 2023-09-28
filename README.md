@@ -7,7 +7,7 @@
 
         npm install
 
-3. Create flock *Outgoing Webhook* using [documentation](https://dev.flock.com/webhook)
+3. Create flock *Outgoing Webhook* using [documentation](https://dev.flock.com/webhooks)
 
 
 4. Modify your playwright.config.ts file to include the following:
